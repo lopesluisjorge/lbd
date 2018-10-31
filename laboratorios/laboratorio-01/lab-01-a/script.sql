@@ -50,9 +50,8 @@ order by d.descdisc;
  */
 
 select distinct d.coddisc Código, h.nota
-from disciplinas d
-    join professores p on d.coddisc = p.coddisc
-    join historico h   on p.coddisc = h.coddisc
+from disciplinas d join professores p on d.coddisc = p.coddisc
+                   join historico h   on p.coddisc = h.coddisc
 where nota between 6 and 8;
 
 /*
