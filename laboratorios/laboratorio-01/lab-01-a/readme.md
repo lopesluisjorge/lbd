@@ -1,7 +1,5 @@
 # Lab 01 - Consultas SQL - Parte 1
 
-[Atividade](lab-01-a.pdf)
-
 ## Questões
 
 1. Obtenha os nomes dos alunos, sexo e idade.
