@@ -1,7 +1,5 @@
 # Lab 01 - Consultas SQL - Parte 2
 
-[Atividade](lab-01-b.pdf)
-
 # Questões
 
 1. Crie um BD chamado Universidade e defina as tabelas a seguir neste BD.
@@ -12,7 +10,7 @@ Departamento (coddepto, nomedepto)
 
 Disciplina (coddepto, numdisc, nomedisc, creditosdisc)
 - o par (coddepto, numdisc) é chave primária;
-- coddepto é uma chave estrangeira para Depto.
+- coddepto é uma chave estrangeira para departamento.
 
 PreRequisito(coddepto, numdisc, coddeptoprereq, numdiscprereq)
 - os atributos (coddepto, numdisc, coddeptoprereq, numdiscprereq) formam a chave primária;
