@@ -23,14 +23,12 @@ produto) e estoque atual de um produto (na tabela estoque). Caso o estoque estej
 
 ## Triggers
 
-4. Faça um trigger para armazenar em uma tabela chamada produtos_atualizados
+4. Faça uma trigger para armazenar em uma tabela chamada produtos_atualizados
 (prd_codigo, prd_qtd_anterior, prd_qtd_atualizada, prd_valor)
-quando ocorrer quaisquer alterações nos atributos da tabela produtos. No entanto, caso
-a alteração atribua o valor zero para o atributo PRD_qtd_estoque, a tabela
-produtos_em_falta deverá ser alimentada com as mesmas informações da tabela
-produto, exceto o atributo prd_valor. Além disso, o atributo prd_status do
-produto atualizado deve ser modificado para NULL e o atributo orp_status de todos os
-orçamentos_produto desse produto deverá ser modificado também para NULL.
+quando ocorrer quaisquer alterações nos atributos da tabela estoque. No entanto, caso
+a alteração atribua o valor zero para o atributo qtde, a tabela produtos_em_falta
+deverá ser alimentada com as mesmas informações da tabela estoque, exceto o atributo
+valor_unitario.
 
 5. Faça um trigger para armazenar em uma tabela chamada
 historico_produtos_excluidos(id, id_produto, descricao,
