@@ -42,23 +42,10 @@ final public class ClienteDao {
             ResultSet clienteComId = stm.executeQuery();
             clienteComId.next();
 
-            return this.construirCliente(clienteComId);
+            return this.constroiCliente(clienteComId);
         } catch (SQLException err) {
             throw new RuntimeException(err);
         }
-    }
-
-    private Cliente construirCliente(ResultSet rs) throws SQLException {
-        Integer id = rs.getInt("id");
-        String nome = rs.getString("nome");
-        String cpf = rs.getString("cpf");
-        String endereco = rs.getString("endereco");
-        String telefone = rs.getString("telefone");
-
-        final Cliente cliente = new Cliente(nome, cpf, endereco, telefone);
-        cliente.setId(id);
-
-        return cliente;
     }
 
     public void trunca() {
@@ -69,5 +56,18 @@ final public class ClienteDao {
         } catch (SQLException err) {
             throw new RuntimeException(err);
         }
+    }
+
+    private Cliente constroiCliente(ResultSet rs) throws SQLException {
+        Integer id = rs.getInt("id");
+        String nome = rs.getString("nome");
+        String cpf = rs.getString("cpf");
+        String endereco = rs.getString("endereco");
+        String telefone = rs.getString("telefone");
+
+        final Cliente cliente = new Cliente(nome, cpf, endereco, telefone);
+        cliente.setId(id);
+
+        return cliente;
     }
 }

@@ -11,6 +11,8 @@ final public class Filme {
     private Integer duracao;
     private String genero;
 
+    final private ArrayList<Video> videos = new ArrayList<>();
+
     public Filme(String titulo, Integer anoDeLancamento, Integer duracao, String genero) {
         this.titulo = titulo;
         this.anoDeLancamento = anoDeLancamento;
@@ -41,4 +43,13 @@ final public class Filme {
     public String getGenero() {
         return genero;
     }
+
+    public ArrayList<Video> getVideos() {
+        return videos;
+    }
+
+    public void adicionar(Video video) {
+        videos.add(video);
+    }
+
 }
