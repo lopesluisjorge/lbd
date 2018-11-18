@@ -1,0 +1,18 @@
+version: "3"
+
+volumes:
+  pgsql-data:
+    driver: local
+
+services:
+  pgsql:
+    image: postgres:10.6-alpine
+    container_name: pgsql
+    ports:
+      - 5432:5432
+    working_dir: "/infra"
+    volumes:
+      - pgsql-data:/var/lib/postgres/data
+      - ./infra/migracoes/pgsql:/infra
+    environment:
+      - POSTGRES_DB=locadora_db
