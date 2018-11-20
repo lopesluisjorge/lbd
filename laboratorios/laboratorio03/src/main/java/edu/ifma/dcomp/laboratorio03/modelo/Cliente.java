@@ -1,5 +1,7 @@
 package edu.ifma.dcomp.laboratorio03.modelo;
 
+import java.util.ArrayList;
+
 final public class Cliente {
 
     private Integer id;
@@ -7,6 +9,8 @@ final public class Cliente {
     private String cpf;
     private String endereco;
     private String telefone;
+
+    private ArrayList<Cliente> clientes = new ArrayList<>();
 
     public Cliente(String nome, String cpf, String endereco, String telefone) {
         this.nome = nome;
@@ -38,4 +42,13 @@ final public class Cliente {
     public String getTelefone() {
         return telefone;
     }
+
+    public ArrayList<Cliente> getClientes() {
+        return clientes;
+    }
+
+    public void adiciona(Cliente cliente) {
+        clientes.add(cliente);
+    }
+
 }
