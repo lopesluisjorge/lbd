@@ -2,8 +2,9 @@ package edu.ifma.dcomp.laboratorio03.modelo;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
-public class Emprestimo {
+final public class Emprestimo {
 
     private Integer id;
     private LocalDate dataLocacao;
@@ -12,12 +13,19 @@ public class Emprestimo {
     private Boolean status;
 
     private Cliente cliente;
+    private ArrayList<Video> videos = new ArrayList<>();
 
     public Emprestimo(LocalDate dataLocacao, LocalDate dataDevolucao, BigDecimal valorAluguel, Boolean status) {
         this.dataLocacao = dataLocacao;
         this.dataDevolucao = dataDevolucao;
         this.valorAluguel = valorAluguel;
         this.status = status;
+    }
+
+    public Emprestimo(
+            Cliente cliente, LocalDate dataLocacao, LocalDate dataDevolucao, BigDecimal valorAluguel, Boolean status) {
+        this(dataLocacao, dataDevolucao, valorAluguel, status);
+        this.cliente = cliente;
     }
 
     public Integer getId() {
@@ -43,4 +51,21 @@ public class Emprestimo {
     public Boolean getStatus() {
         return status;
     }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public ArrayList<Video> getVideos() {
+        return videos;
+    }
+
+    public void adiciona(Video video) {
+        videos.add(video);
+    }
+
 }

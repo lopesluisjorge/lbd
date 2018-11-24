@@ -1,6 +1,7 @@
 package edu.ifma.dcomp.laboratorio03.modelo;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 
 final public class Video {
 
@@ -10,6 +11,7 @@ final public class Video {
     private BigDecimal valorDaDiaria;
 
     private Filme filme;
+    private ArrayList<Emprestimo> emprestimos = new ArrayList<>();
 
     public Video(Integer status, String tipo, BigDecimal valorDaDiaria) {
         this.status = status;
@@ -48,5 +50,13 @@ final public class Video {
 
     public Filme getFilme() {
         return filme;
+    }
+
+    public ArrayList<Emprestimo> getEmprestimos() {
+        return emprestimos;
+    }
+
+    public void adiciona(Emprestimo emprestimo) {
+        emprestimos.add(emprestimo);
     }
 }

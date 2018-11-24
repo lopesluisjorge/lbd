@@ -10,7 +10,7 @@ final public class Cliente {
     private String endereco;
     private String telefone;
 
-    private ArrayList<Cliente> clientes = new ArrayList<>();
+    private ArrayList<Emprestimo> emprestimos = new ArrayList<>();
 
     public Cliente(String nome, String cpf, String endereco, String telefone) {
         this.nome = nome;
@@ -43,12 +43,12 @@ final public class Cliente {
         return telefone;
     }
 
-    public ArrayList<Cliente> getClientes() {
-        return clientes;
+    public ArrayList<Emprestimo> getEmprestimos() {
+        return emprestimos;
     }
 
-    public void adiciona(Cliente cliente) {
-        clientes.add(cliente);
+    public void adiciona(Emprestimo emprestimo) {
+        emprestimos.add(emprestimo);
     }
 
 }
