@@ -1,6 +1,6 @@
-package edu.ifma.dcomp.laboratorio03.dao;
+package br.edu.ifma.dcomp.laboratorio03.dao;
 
-import edu.ifma.dcomp.laboratorio03.modelo.Filme;
+import br.edu.ifma.dcomp.laboratorio03.modelo.Filme;
 
 import java.sql.*;
 import java.util.ArrayList;

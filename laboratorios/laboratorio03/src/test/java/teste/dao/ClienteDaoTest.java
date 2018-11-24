@@ -1,9 +1,9 @@
 package teste.dao;
 
-import edu.ifma.dcomp.laboratorio03.dao.ClienteDao;
-import edu.ifma.dcomp.laboratorio03.infra.PoolDeConexoes;
-import edu.ifma.dcomp.laboratorio03.infra.PoolPostgres;
-import edu.ifma.dcomp.laboratorio03.modelo.Cliente;
+import br.edu.ifma.dcomp.laboratorio03.dao.ClienteDao;
+import br.edu.ifma.dcomp.laboratorio03.infra.PoolDeConexoes;
+import br.edu.ifma.dcomp.laboratorio03.infra.PoolPostgres;
+import br.edu.ifma.dcomp.laboratorio03.modelo.Cliente;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;

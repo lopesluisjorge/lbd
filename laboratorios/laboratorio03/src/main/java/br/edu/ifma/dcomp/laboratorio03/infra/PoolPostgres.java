@@ -1,4 +1,4 @@
-package edu.ifma.dcomp.laboratorio03.infra;
+package br.edu.ifma.dcomp.laboratorio03.infra;
 
 import org.postgresql.ds.PGSimpleDataSource;
 

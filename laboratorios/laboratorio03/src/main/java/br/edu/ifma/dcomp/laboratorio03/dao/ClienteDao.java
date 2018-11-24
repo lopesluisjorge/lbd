@@ -1,6 +1,6 @@
-package edu.ifma.dcomp.laboratorio03.dao;
+package br.edu.ifma.dcomp.laboratorio03.dao;
 
-import edu.ifma.dcomp.laboratorio03.modelo.Cliente;
+import br.edu.ifma.dcomp.laboratorio03.modelo.Cliente;
 
 import java.sql.*;
 

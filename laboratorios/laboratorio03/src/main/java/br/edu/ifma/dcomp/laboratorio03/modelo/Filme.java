@@ -1,7 +1,6 @@
-package edu.ifma.dcomp.laboratorio03.modelo;
+package br.edu.ifma.dcomp.laboratorio03.modelo;
 
 import java.util.ArrayList;
-import java.util.List;
 
 final public class Filme {
 
