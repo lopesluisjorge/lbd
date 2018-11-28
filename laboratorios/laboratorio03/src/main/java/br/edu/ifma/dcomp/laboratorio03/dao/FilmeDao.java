@@ -15,7 +15,7 @@ final public class FilmeDao {
     }
 
     public void salva(Filme filme) {
-        String sql = "insert into filmes (titulo, ano_de_lancamento, duracao, genero) values (?, ?, ?, ?)";
+        String sql = "insert into filmes (titulo, ano_lancamento, duracao, genero) values (?, ?, ?, ?)";
 
         try (PreparedStatement stm = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stm.setString(1, filme.getTitulo());
@@ -36,7 +36,7 @@ final public class FilmeDao {
     }
 
     public void atualiza(Filme filme) {
-        String sql = "update filmes set titulo = ?, ano_de_lancamento = ?, duracao = ?, genero = ? where id = ?";
+        String sql = "update filmes set titulo = ?, ano_lancamento = ?, duracao = ?, genero = ? where id = ?";
 
         try (PreparedStatement stm = conexao.prepareStatement(sql)) {
             stm.setString(1, filme.getTitulo());
@@ -98,7 +98,7 @@ final public class FilmeDao {
     private Filme constroiFilme(ResultSet rs) throws SQLException {
         Integer id = rs.getInt("id");
         String titulo = rs.getString("titulo");
-        Integer anoDeLancamento = rs.getInt("ano_de_lancamento");
+        Integer anoDeLancamento = rs.getInt("ano_lancamento");
         Integer duracao = rs.getInt("duracao");
         String genero = rs.getString("genero");
 

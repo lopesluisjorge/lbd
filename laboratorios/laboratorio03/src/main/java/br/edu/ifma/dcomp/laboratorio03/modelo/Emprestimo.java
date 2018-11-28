@@ -6,16 +6,19 @@ import java.util.ArrayList;
 
 final public class Emprestimo {
 
-    private Integer id;
+    final public static boolean ATIVO = true;
+    final public static boolean DEVOLVIDO = false;
+
+    private int id;
     private LocalDate dataLocacao;
     private LocalDate dataDevolucao;
     private BigDecimal valorAluguel;
-    private Boolean status;
+    private boolean status;
 
     private Cliente cliente;
     private ArrayList<Video> videos = new ArrayList<>();
 
-    public Emprestimo(LocalDate dataLocacao, LocalDate dataDevolucao, BigDecimal valorAluguel, Boolean status) {
+    public Emprestimo(LocalDate dataLocacao, LocalDate dataDevolucao, BigDecimal valorAluguel, boolean status) {
         this.dataLocacao = dataLocacao;
         this.dataDevolucao = dataDevolucao;
         this.valorAluguel = valorAluguel;
@@ -23,16 +26,16 @@ final public class Emprestimo {
     }
 
     public Emprestimo(
-            Cliente cliente, LocalDate dataLocacao, LocalDate dataDevolucao, BigDecimal valorAluguel, Boolean status) {
+            Cliente cliente, LocalDate dataLocacao, LocalDate dataDevolucao, BigDecimal valorAluguel, boolean status) {
         this(dataLocacao, dataDevolucao, valorAluguel, status);
         this.cliente = cliente;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -48,8 +51,12 @@ final public class Emprestimo {
         return valorAluguel;
     }
 
-    public Boolean getStatus() {
+    public boolean getStatus() {
         return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
     public Cliente getCliente() {

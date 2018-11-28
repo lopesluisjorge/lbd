@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 final public class Filme {
 
-    private Integer id;
+    private int id;
     private String titulo;
     private Integer anoDeLancamento;
     private Integer duracao;
@@ -19,11 +19,11 @@ final public class Filme {
         this.genero = genero;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -31,16 +31,32 @@ final public class Filme {
         return titulo;
     }
 
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
     public Integer getAnoDeLancamento() {
         return anoDeLancamento;
+    }
+
+    public void setAnoDeLancamento(Integer anoDeLancamento) {
+        this.anoDeLancamento = anoDeLancamento;
     }
 
     public Integer getDuracao() {
         return duracao;
     }
 
+    public void setDuracao(Integer duracao) {
+        this.duracao = duracao;
+    }
+
     public String getGenero() {
         return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
     }
 
     public ArrayList<Video> getVideos() {

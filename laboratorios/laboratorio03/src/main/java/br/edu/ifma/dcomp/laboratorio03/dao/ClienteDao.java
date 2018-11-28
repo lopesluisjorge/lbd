@@ -1,6 +1,7 @@
 package br.edu.ifma.dcomp.laboratorio03.dao;
 
 import br.edu.ifma.dcomp.laboratorio03.modelo.Cliente;
+import br.edu.ifma.dcomp.laboratorio03.modelo.Emprestimo;
 
 import java.sql.*;
 
@@ -70,4 +71,5 @@ final public class ClienteDao {
 
         return cliente;
     }
+
 }

@@ -5,8 +5,11 @@ import java.util.ArrayList;
 
 final public class Video {
 
-    private Integer id;
-    private Integer status;
+    final public static int DISPOSNIVEL = 1;
+    final public static int LOCADO = 2;
+
+    private int id;
+    private int status;
     private String tipo;
     private BigDecimal valorDaDiaria;
 
@@ -24,16 +27,20 @@ final public class Video {
         this.filme = filme;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public Integer getStatus() {
+    public int getStatus() {
         return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public String getTipo() {

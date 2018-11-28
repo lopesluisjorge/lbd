@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 final public class Cliente {
 
-    private Integer id;
+    private int id;
     private String nome;
     private String cpf;
     private String endereco;
@@ -19,11 +19,11 @@ final public class Cliente {
         this.telefone = telefone;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
