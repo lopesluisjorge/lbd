@@ -67,4 +67,14 @@ final public class Filme {
         videos.add(video);
     }
 
+    @Override
+    public String toString() {
+        return "Filme {" +
+                "id=" + id +
+                ", titulo='" + titulo + '\'' +
+                ", anoDeLancamento=" + anoDeLancamento +
+                ", duracao=" + duracao +
+                ", genero='" + genero + '\'' +
+                '}';
+    }
 }

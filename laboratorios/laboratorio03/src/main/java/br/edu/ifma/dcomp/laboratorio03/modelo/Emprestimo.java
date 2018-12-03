@@ -75,4 +75,15 @@ final public class Emprestimo {
         videos.add(video);
     }
 
+    @Override
+    public String toString() {
+        return "Emprestimo{" +
+                "id=" + id +
+                ", dataLocacao=" + dataLocacao +
+                ", dataDevolucao=" + dataDevolucao +
+                ", valorAluguel=" + valorAluguel +
+                ", status=" + status +
+                ", cliente=" + cliente +
+                '}';
+    }
 }

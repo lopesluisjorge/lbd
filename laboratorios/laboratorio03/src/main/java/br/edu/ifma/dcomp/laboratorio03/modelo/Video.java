@@ -66,4 +66,15 @@ final public class Video {
     public void adiciona(Emprestimo emprestimo) {
         emprestimos.add(emprestimo);
     }
+
+    @Override
+    public String toString() {
+        return "Video {" +
+                "id=" + id +
+                ", status=" + status +
+                ", tipo='" + tipo + '\'' +
+                ", valorDaDiaria=" + valorDaDiaria +
+                ", filme=" + filme +
+                '}';
+    }
 }

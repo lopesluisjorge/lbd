@@ -1,4 +1,4 @@
-package teste.dao;
+package teste.unitario.dao;
 
 import br.edu.ifma.dcomp.laboratorio03.dao.ClienteDao;
 import br.edu.ifma.dcomp.laboratorio03.infra.PoolDeConexoes;
@@ -8,7 +8,7 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-public class ClienteDaoTest extends TestCase {
+final public class ClienteDaoTest extends TestCase {
 
     private ClienteDao clienteDao;
 
@@ -20,12 +20,18 @@ public class ClienteDaoTest extends TestCase {
         clienteDao.trunca();
     }
 
+    @Override
+    protected void tearDown() throws Exception {
+        super.tearDown();
+        clienteDao.trunca();
+    }
+
     public void testAdicionarCliente() {
         Cliente cliente = new Cliente("Lorem", "12345678910", "R. S. Camilo", "988778877");
 
         clienteDao.salva(cliente);
 
-        assertEquals(1, (int) cliente.getId());
+        assertEquals(1, cliente.getId());
     }
 
     public static Test suite(){

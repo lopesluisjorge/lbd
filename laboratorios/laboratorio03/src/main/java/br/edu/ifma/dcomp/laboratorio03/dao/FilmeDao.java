@@ -1,5 +1,6 @@
 package br.edu.ifma.dcomp.laboratorio03.dao;
 
+import br.edu.ifma.dcomp.laboratorio03.construcao.ConstrutorFilme;
 import br.edu.ifma.dcomp.laboratorio03.modelo.Filme;
 
 import java.sql.*;
@@ -51,7 +52,7 @@ final public class FilmeDao {
         }
     }
 
-    public Filme recupera(Integer id) {
+    public Filme recupera(int id) {
         String sql = "select * from filmes where id = ?";
 
         try (PreparedStatement stm = conexao.prepareStatement(sql)) {
@@ -102,10 +103,7 @@ final public class FilmeDao {
         Integer duracao = rs.getInt("duracao");
         String genero = rs.getString("genero");
 
-        final Filme filme = new Filme(titulo, anoDeLancamento, duracao, genero);
-        filme.setId(id);
-
-        return filme;
+        return ConstrutorFilme.constroi(titulo, anoDeLancamento, duracao, genero, id);
     }
 
 }

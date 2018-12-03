@@ -1,4 +1,4 @@
-package teste.dao;
+package teste.unitario.dao;
 
 import br.edu.ifma.dcomp.laboratorio03.dao.FilmeDao;
 import br.edu.ifma.dcomp.laboratorio03.infra.PoolDeConexoes;
@@ -9,8 +9,9 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class FilmeDaoTest extends TestCase {
+final public class FilmeDaoTest extends TestCase {
 
     private FilmeDao filmeDAO;
 
@@ -19,6 +20,12 @@ public class FilmeDaoTest extends TestCase {
         super.setUp();
         PoolDeConexoes pool = new PoolPostgres();
         filmeDAO = new FilmeDao(pool.getConexao());
+        filmeDAO.trunca();
+    }
+
+    @Override
+    protected void tearDown() throws Exception {
+        super.tearDown();
         filmeDAO.trunca();
     }
 
@@ -60,7 +67,7 @@ public class FilmeDaoTest extends TestCase {
 
         filmes.forEach(filme -> filmeDAO.salva(filme));
 
-        ArrayList<Filme> listagemDeFilmes = (ArrayList<Filme>) filmeDAO.lista();
+        List<Filme> listagemDeFilmes = filmeDAO.lista();
         assertEquals(5, listagemDeFilmes.size());
     }
 

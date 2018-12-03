@@ -6,7 +6,7 @@ import br.edu.ifma.dcomp.laboratorio03.modelo.Video;
 
 import java.math.BigDecimal;
 import java.sql.*;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 final public class EmprestimoDao {
@@ -17,8 +17,8 @@ final public class EmprestimoDao {
         this.conexao = conexao;
     }
 
-    public void realizaLocacao(Cliente cliente, ArrayList<Video> videos) {
-        String sqlSoliciatacaoEmprestimo = "insert into emprestimos (cliente_id, data_locacao, status) values (?, current_date, 1)";
+    public void realizaLocacao(Cliente cliente, List<Video> videos) {
+        String sqlSoliciatacaoEmprestimo = "insert into emprestimos (cliente_id, data_locacao, status) values (?, current_date, true)";
 
         if (!verificarDisponibilidadeDosVideos(videos)) {
             throw new RuntimeException("Alguns vídeos já estão emprestados");
@@ -123,6 +123,10 @@ final public class EmprestimoDao {
         }
     }
 
+    public List<Emprestimo> listaEmprestimosDo(Cliente cliente) {
+
+    }
+
     public void trunca() {
         final String sqlEmprestimoVideo = "truncate emprestimo_video restart identity cascade";
 
@@ -133,7 +137,7 @@ final public class EmprestimoDao {
         }
     }
 
-    private boolean verificarDisponibilidadeDosVideos(ArrayList<Video> videos) {
+    private boolean verificarDisponibilidadeDosVideos(List<Video> videos) {
         int quantidadeVideosDisponiveis = videos.stream()
                 .filter(video -> video.getStatus() == Video.DISPOSNIVEL)
                 .collect(Collectors.toList())
