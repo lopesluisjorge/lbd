@@ -13,6 +13,6 @@ services:
     working_dir: "/infra"
     volumes:
       - pgsql-data:/var/lib/postgres/data
-      - ./infra/migracoes/pgsql:/infra
+      - ./infra:/infra
     environment:
       - POSTGRES_DB=locadora_db
