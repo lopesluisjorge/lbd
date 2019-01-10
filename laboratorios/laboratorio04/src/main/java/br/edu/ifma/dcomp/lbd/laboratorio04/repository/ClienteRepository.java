@@ -3,6 +3,7 @@ package br.edu.ifma.dcomp.lbd.laboratorio04.repository;
 import br.edu.ifma.dcomp.lbd.laboratorio04.model.Cliente;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 
 public class ClienteRepository {
 
@@ -13,7 +14,10 @@ public class ClienteRepository {
     }
 
     public void salva(Cliente cliente) {
+        final EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
         entityManager.persist(cliente);
+        transaction.commit();
     }
 
     public Cliente buscaPorId(Integer id) {

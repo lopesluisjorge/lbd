@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "filme")
@@ -22,7 +23,7 @@ public class Filme {
     private Integer anoDeLancamento;
 
 
-    private Double duracao;
+    private Integer duracao;
 
 
     @Column(nullable = false)
@@ -53,11 +54,11 @@ public class Filme {
         this.anoDeLancamento = anoDeLancamento;
     }
 
-    public Double getDuracao() {
+    public Integer getDuracao() {
         return duracao;
     }
 
-    public void setDuracao(Double duracao) {
+    public void setDuracao(Integer duracao) {
         this.duracao = duracao;
     }
 
@@ -75,5 +76,18 @@ public class Filme {
 
     public List<Video> getVideos() {
         return videos;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Filme filme = (Filme) o;
+        return Objects.equals(id, filme.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

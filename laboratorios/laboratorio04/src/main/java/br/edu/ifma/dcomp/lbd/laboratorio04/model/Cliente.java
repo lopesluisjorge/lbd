@@ -3,6 +3,7 @@ package br.edu.ifma.dcomp.lbd.laboratorio04.model;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "cliente")
@@ -21,11 +22,10 @@ public class Cliente {
     private String cpf;
 
 
-    @Column(nullable = false)
     private String endereco;
 
 
-    @Column(length = 16)
+    @Column(length = 20)
     private String telefone;
 
 
@@ -71,7 +71,7 @@ public class Cliente {
         this.telefone = telefone;
     }
 
-    public Boolean isActivo() {
+    public Boolean isAtivo() {
         return ativo;
     }
 
@@ -89,5 +89,18 @@ public class Cliente {
 
     public List<Emprestimo> getEmprestimos() {
         return emprestimos;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cliente cliente = (Cliente) o;
+        return Objects.equals(id, cliente.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
