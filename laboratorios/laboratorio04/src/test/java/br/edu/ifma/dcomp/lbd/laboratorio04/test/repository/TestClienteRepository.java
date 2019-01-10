@@ -7,6 +7,7 @@ import br.edu.ifma.dcomp.lbd.laboratorio04.test.support.EMTestInstantiator;
 import org.junit.jupiter.api.*;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 
 public class TestClienteRepository {
 
@@ -18,7 +19,10 @@ public class TestClienteRepository {
         entityManager = EMTestInstantiator.getEntityManager();
         clienteRepository = new ClienteRepository(entityManager);
 
-        entityManager.createQuery("from Cliente").getResultList().forEach(cliente -> clienteRepository.exclui((Cliente) cliente));
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+        entityManager.createNativeQuery("delete from cliente where id > 0").executeUpdate();
+        transaction.commit();
     }
 
     @AfterEach
