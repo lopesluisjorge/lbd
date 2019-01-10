@@ -21,7 +21,7 @@ public class TestClienteRepository {
 
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
-        entityManager.createNativeQuery("delete from cliente where id > 0").executeUpdate();
+        entityManager.createQuery("delete from Cliente where id > 0").executeUpdate();
         transaction.commit();
     }
 
