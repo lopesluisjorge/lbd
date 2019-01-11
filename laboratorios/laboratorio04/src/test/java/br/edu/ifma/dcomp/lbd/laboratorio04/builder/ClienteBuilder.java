@@ -1,10 +1,16 @@
-package br.edu.ifma.dcomp.lbd.laboratorio04.test.builder;
+package br.edu.ifma.dcomp.lbd.laboratorio04.builder;
 
 import br.edu.ifma.dcomp.lbd.laboratorio04.model.Cliente;
 
 public class ClienteBuilder {
 
     final private Cliente cliente = new Cliente();
+
+    private ClienteBuilder() {}
+
+    public static ClienteBuilder umcliente() {
+        return new ClienteBuilder();
+    }
 
     public ClienteBuilder comNome(String nome) {
         cliente.setNome(nome);
@@ -26,7 +32,7 @@ public class ClienteBuilder {
         return this;
     }
 
-    public Cliente build() {
+    public Cliente constroi() {
         if (null == cliente.getNome()) cliente.setNome("Jon");
         if (null == cliente.getCpf()) cliente.setCpf("12345678910");
         if (null == cliente.getEndereco()) cliente.setEndereco("R. S. Antonio, 67");

@@ -3,7 +3,6 @@ package br.edu.ifma.dcomp.lbd.laboratorio04.repository;
 import br.edu.ifma.dcomp.lbd.laboratorio04.model.Filme;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 
 public class FilmeRepository {
 
@@ -14,10 +13,7 @@ public class FilmeRepository {
     }
 
     public void salva(Filme filme) {
-        final EntityTransaction transaction = entityManager.getTransaction();
-        transaction.begin();
         entityManager.persist(filme);
-        transaction.commit();
     }
 
     public Filme buscaPorId(Integer id) {

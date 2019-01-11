@@ -1,86 +1,92 @@
-package br.edu.ifma.dcomp.lbd.laboratorio04.test.repository;
+package br.edu.ifma.dcomp.lbd.laboratorio04.repository;
 
+import br.edu.ifma.dcomp.lbd.laboratorio04.builder.FilmeBuilder;
+import br.edu.ifma.dcomp.lbd.laboratorio04.builder.VideoBuilder;
 import br.edu.ifma.dcomp.lbd.laboratorio04.model.Filme;
 import br.edu.ifma.dcomp.lbd.laboratorio04.model.Video;
-import br.edu.ifma.dcomp.lbd.laboratorio04.repository.FilmeRepository;
-import br.edu.ifma.dcomp.lbd.laboratorio04.repository.VideoRepository;
-import br.edu.ifma.dcomp.lbd.laboratorio04.test.builder.FilmeBuilder;
-import br.edu.ifma.dcomp.lbd.laboratorio04.test.builder.VideoBuilder;
-import br.edu.ifma.dcomp.lbd.laboratorio04.test.support.EMTestInstantiator;
 import org.junit.jupiter.api.*;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import java.math.BigDecimal;
 
-public class TestVideoRepository {
+public class VideoRepositoryTest {
+
+    private static EntityManagerFactory entityManagerFactory;
 
     private EntityManager entityManager;
     private FilmeRepository filmeRepository;
     private VideoRepository videoRepository;
 
+    @BeforeAll
+    private static void init() {
+        entityManagerFactory = Persistence.createEntityManagerFactory("laboratorio04_test");
+    }
+
     @BeforeEach
     private void setUp() {
-        entityManager = EMTestInstantiator.getEntityManager();
-        filmeRepository = new FilmeRepository(entityManager);
-        videoRepository = new VideoRepository(entityManager);
+        entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
 
-        entityManager.createQuery("from Video").getResultList().forEach(video -> {
-            videoRepository.exclui((Video) video);
-        });
+        filmeRepository = new FilmeRepository(entityManager);
+        videoRepository = new VideoRepository(entityManager);;
     }
 
     @AfterEach
     private void tearDown() {
+        entityManager.getTransaction().rollback();
         entityManager.close();
+    }
+
+    @AfterAll
+    private static void tearDownAll() {
+        entityManagerFactory.close();
     }
 
     @Test
     public void testDeveSalvarVideo() {
-        final Filme filme = new FilmeBuilder().build();
-
-        filmeRepository.salva(filme);
-
+        final Filme filme = FilmeBuilder.umFilme().constroi();
         final Video video = new Video();
         video.setFilme(filme);
         video.setStatus(1);
         video.setTipo("DVD");
         video.setValorDaDiaria(new BigDecimal(1.99));
 
+        filmeRepository.salva(filme);
         videoRepository.salva(video);
+        entityManager.flush();
 
         Assertions.assertTrue(filme.getId() != null);
     }
 
     @Test
     public void testDeveConsultarVideo() {
-        final Video video = new VideoBuilder().build();
+        final Video video = VideoBuilder.umVideo().constroi();
 
         filmeRepository.salva(video.getFilme());
         videoRepository.salva(video);
+        entityManager.flush();
 
-        Assertions.assertTrue(video.getId() != null);
-
-        int idVideo = video.getId();
-
-        Video vigeoBusca = videoRepository.buscaPorId(idVideo);
+        Video vigeoBusca = videoRepository.buscaPorId(video.getId());
 
         Assertions.assertTrue(vigeoBusca.equals(video));
     }
 
     @Test
     public void testSeAtualizaOVideoNoBanco() {
-        final Video video = new VideoBuilder().build();
+        final Video video = VideoBuilder.umVideo().constroi();
 
         filmeRepository.salva(video.getFilme());
         videoRepository.salva(video);
+        entityManager.flush();
 
-        Assertions.assertTrue(video.getId() != null);
-
-        final Filme novoFilme = new FilmeBuilder()
+        final Filme novoFilme = FilmeBuilder
+                .umFilme()
                 .comTitulo("Seja o que Deus quiser 2")
                 .comDuracao(3)
                 .comAnoDeLancamento(2020)
-                .build();
+                .constroi();
 
         video.setFilme(novoFilme);
 
@@ -93,12 +99,11 @@ public class TestVideoRepository {
 
     @Test
     public void testDeveRemoverOVideo() {
-        final Video video = new VideoBuilder().build();
+        final Video video = VideoBuilder.umVideo().constroi();
 
         filmeRepository.salva(video.getFilme());
         videoRepository.salva(video);
-
-        Assertions.assertTrue(video.getId() != null);
+        entityManager.flush();
 
         Integer idfilme = video.getId();
 

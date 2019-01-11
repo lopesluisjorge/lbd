@@ -1,29 +1,42 @@
-package br.edu.ifma.dcomp.lbd.laboratorio04.test.repository;
+package br.edu.ifma.dcomp.lbd.laboratorio04.repository;
 
+import br.edu.ifma.dcomp.lbd.laboratorio04.builder.FilmeBuilder;
 import br.edu.ifma.dcomp.lbd.laboratorio04.model.Filme;
-import br.edu.ifma.dcomp.lbd.laboratorio04.repository.FilmeRepository;
-import br.edu.ifma.dcomp.lbd.laboratorio04.test.builder.FilmeBuilder;
-import br.edu.ifma.dcomp.lbd.laboratorio04.test.support.EMTestInstantiator;
 import org.junit.jupiter.api.*;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
-public class TestFilmeRepository {
+public class FilmeRepositoryTest {
+
+    private static EntityManagerFactory entityManagerFactory;
 
     private EntityManager entityManager;
     private FilmeRepository filmeRepository;
 
+    @BeforeAll
+    private static void init() {
+        entityManagerFactory = Persistence.createEntityManagerFactory("laboratorio04_test");
+    }
+
     @BeforeEach
     private void setUp() {
-        entityManager = EMTestInstantiator.getEntityManager();
-        filmeRepository = new FilmeRepository(entityManager);
+        entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
 
-        entityManager.createQuery("from Filme").getResultList().forEach(filme -> filmeRepository.exclui((Filme) filme));
+        filmeRepository = new FilmeRepository(entityManager);
     }
 
     @AfterEach
     private void tearDown() {
+        entityManager.getTransaction().rollback();
         entityManager.close();
+    }
+
+    @AfterAll
+    private static void tearDownAll() {
+        entityManagerFactory.close();
     }
 
     @Test
@@ -35,32 +48,29 @@ public class TestFilmeRepository {
         filme.setGenero("Drama");
 
         filmeRepository.salva(filme);
+        entityManager.flush();
 
         Assertions.assertTrue(filme.getId() != null);
     }
 
     @Test
     public void testDeveConsultarFilme() {
-        final Filme filme = new FilmeBuilder().build();
+        final Filme filme = FilmeBuilder.umFilme().constroi();
 
         filmeRepository.salva(filme);
+        entityManager.flush();
 
-        Assertions.assertTrue(filme.getId() != null);
-
-        int idFilme = filme.getId();
-
-        Filme filmeBusca = filmeRepository.buscaPorId(idFilme);
+        final Filme filmeBusca = filmeRepository.buscaPorId(filme.getId());
 
         Assertions.assertTrue(filmeBusca.equals(filme));
     }
 
     @Test
-    public void testSeAtualizaOTituloDoFilmeNoBanco() {
-        final Filme filme = new FilmeBuilder().build();
+    public void deveAtualizarOTituloDoFilme() {
+        final Filme filme = FilmeBuilder.umFilme().constroi();
 
         filmeRepository.salva(filme);
-
-        Assertions.assertTrue(filme.getId() != null);
+        entityManager.flush();
 
         final String novoTitulo = "Seja o que Deus quiser 2";
 
@@ -75,17 +85,14 @@ public class TestFilmeRepository {
 
     @Test
     public void testDeveRemoverOFilme() {
-        final Filme filme = new FilmeBuilder().build();
+        final Filme filme = FilmeBuilder.umFilme().constroi();
 
         filmeRepository.salva(filme);
-
-        Assertions.assertTrue(filme.getId() != null);
-
-        Integer idfilme = filme.getId();
+        entityManager.flush();
 
         filmeRepository.exclui(filme);
 
-        Assertions.assertEquals(null, filmeRepository.buscaPorId(idfilme));
+        Assertions.assertEquals(null, filmeRepository.buscaPorId(filme.getId()));
     }
 
 }

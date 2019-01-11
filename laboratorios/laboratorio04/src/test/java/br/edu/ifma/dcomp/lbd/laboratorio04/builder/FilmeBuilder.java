@@ -1,10 +1,16 @@
-package br.edu.ifma.dcomp.lbd.laboratorio04.test.builder;
+package br.edu.ifma.dcomp.lbd.laboratorio04.builder;
 
 import br.edu.ifma.dcomp.lbd.laboratorio04.model.Filme;
 
 public class FilmeBuilder {
 
     final private Filme filme = new Filme();
+
+    private FilmeBuilder() {}
+
+    public static FilmeBuilder umFilme() {
+        return new FilmeBuilder();
+    }
 
     public FilmeBuilder comTitulo(String titulo) {
         filme.setTitulo(titulo);
@@ -26,7 +32,7 @@ public class FilmeBuilder {
         return this;
     }
 
-    public Filme build() {
+    public Filme constroi() {
         if (null == filme.getTitulo()) filme.setTitulo("Seja o que Deus quiser");
         if (null == filme.getDuracao()) filme.setDuracao(2);
         if (null == filme.getGenero()) filme.setGenero("Drama");
