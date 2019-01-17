@@ -36,10 +36,16 @@ public class ClienteRepository {
     }
 
     public Cliente buscaPorCpf(String cpf) {
-        return entityManager
+        final List<Cliente> clienteComCpf = entityManager
                 .createQuery("from Cliente where cpf = :cpf", Cliente.class)
                 .setParameter("cpf", cpf)
-                .getSingleResult();
+                .getResultList();
+
+        if (clienteComCpf.isEmpty()) {
+            return null;
+        }
+
+        return clienteComCpf.get(0);
     }
 
     /**

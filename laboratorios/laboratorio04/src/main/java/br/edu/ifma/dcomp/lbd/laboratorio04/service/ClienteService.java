@@ -1,6 +1,5 @@
 package br.edu.ifma.dcomp.lbd.laboratorio04.service;
 
-import br.edu.ifma.dcomp.lbd.laboratorio04.infra.EMFactory;
 import br.edu.ifma.dcomp.lbd.laboratorio04.model.Cliente;
 import br.edu.ifma.dcomp.lbd.laboratorio04.repository.ClienteRepository;
 
@@ -12,12 +11,12 @@ public class ClienteService {
     private EntityManager entityManager;
     private ClienteRepository clienteRepository;
 
-    public ClienteService() {
-        this.entityManager = new EMFactory().getEntityManager();
+    public ClienteService(EntityManager entityManager) {
+        this.entityManager = entityManager;
         clienteRepository = new ClienteRepository(entityManager);
     }
 
-    public Cliente salva(Cliente cliente) {
+    public Cliente adiciona(Cliente cliente) {
         Cliente clienteExistente = clienteRepository.buscaPorCpf(cliente.getCpf());
 
         if (clienteExistente != null) {
@@ -37,6 +36,12 @@ public class ClienteService {
 
     public Cliente porCpf(String cpf) {
         return clienteRepository.buscaPorCpf(cpf);
+    }
+
+    public void remove(Cliente cliente) {
+        entityManager.getTransaction().begin();
+        clienteRepository.exclui(cliente);
+        entityManager.getTransaction().commit();
     }
 
 }

@@ -5,8 +5,6 @@ import br.edu.ifma.dcomp.lbd.laboratorio04.model.Emprestimo;
 import br.edu.ifma.dcomp.lbd.laboratorio04.repository.ClienteRepository;
 
 import javax.persistence.EntityManager;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 public class DebitoService {
