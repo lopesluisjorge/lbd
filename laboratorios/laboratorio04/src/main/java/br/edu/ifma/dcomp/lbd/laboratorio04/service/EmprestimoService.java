@@ -47,6 +47,7 @@ public class EmprestimoService {
         final Emprestimo emprestimo = new Emprestimo();
         emprestimo.adiciona(videos);
         cliente.adicionar(emprestimo);
+        emprestimo.setCliente(cliente);
         videoList.forEach(video -> video.setStatus(StatusVideo.EMPRESTADO));
 
         emprestimoRepository.atualiza(emprestimo);
