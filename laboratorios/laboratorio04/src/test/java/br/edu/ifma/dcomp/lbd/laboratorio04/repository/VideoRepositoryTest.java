@@ -3,6 +3,7 @@ package br.edu.ifma.dcomp.lbd.laboratorio04.repository;
 import br.edu.ifma.dcomp.lbd.laboratorio04.builder.FilmeBuilder;
 import br.edu.ifma.dcomp.lbd.laboratorio04.builder.VideoBuilder;
 import br.edu.ifma.dcomp.lbd.laboratorio04.model.Filme;
+import br.edu.ifma.dcomp.lbd.laboratorio04.model.StatusVideo;
 import br.edu.ifma.dcomp.lbd.laboratorio04.model.TipoVideo;
 import br.edu.ifma.dcomp.lbd.laboratorio04.model.Video;
 import org.junit.*;
@@ -50,7 +51,7 @@ public class VideoRepositoryTest {
         final Filme filme = FilmeBuilder.umFilme().constroi();
         final Video video = new Video();
         video.setFilme(filme);
-        video.setStatus(1);
+        video.setStatus(StatusVideo.DISPONIVEL);
         video.setTipo(TipoVideo.DVD);
         video.setValorDaDiaria(new BigDecimal(1.99));
 

@@ -13,8 +13,8 @@ public class Video {
     private Integer id;
 
 
-    @Column(columnDefinition = "smallint")
-    private Integer status;
+    @Enumerated(EnumType.STRING)
+    private StatusVideo status;
 
 
     @Enumerated(EnumType.STRING)
@@ -34,11 +34,11 @@ public class Video {
         return id;
     }
 
-    public Integer getStatus() {
+    public StatusVideo getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(StatusVideo status) {
         this.status = status;
     }
 
@@ -78,4 +78,5 @@ public class Video {
     public int hashCode() {
         return Objects.hash(id);
     }
+
 }

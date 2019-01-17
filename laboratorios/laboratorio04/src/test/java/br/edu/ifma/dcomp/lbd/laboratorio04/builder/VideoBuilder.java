@@ -1,6 +1,7 @@
 package br.edu.ifma.dcomp.lbd.laboratorio04.builder;
 
 import br.edu.ifma.dcomp.lbd.laboratorio04.model.Filme;
+import br.edu.ifma.dcomp.lbd.laboratorio04.model.StatusVideo;
 import br.edu.ifma.dcomp.lbd.laboratorio04.model.TipoVideo;
 import br.edu.ifma.dcomp.lbd.laboratorio04.model.Video;
 
@@ -21,7 +22,7 @@ public class VideoBuilder {
         return this;
     }
 
-    public VideoBuilder comStatus(Integer status) {
+    public VideoBuilder comStatus(StatusVideo status) {
         video.setStatus(status);
         return this;
     }
@@ -38,7 +39,7 @@ public class VideoBuilder {
 
     public Video constroi() {
         if (null == video.getFilme()) video.setFilme(FilmeBuilder.umFilme().constroi());
-        if (null == video.getStatus()) video.setStatus(1);
+        if (null == video.getStatus()) video.setStatus(StatusVideo.DISPONIVEL);
         if (null == video.getTipo()) video.setTipo(TipoVideo.DVD);
         if (null == video.getValorDaDiaria()) video.setValorDaDiaria(new BigDecimal(1.99));
 
