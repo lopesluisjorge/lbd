@@ -1,6 +1,7 @@
 package br.edu.ifma.dcomp.lbd.laboratorio04.repository;
 
 import br.edu.ifma.dcomp.lbd.laboratorio04.model.Video;
+import org.hibernate.TransientPropertyValueException;
 
 import javax.persistence.EntityManager;
 
@@ -13,7 +14,11 @@ public class VideoRepository {
     }
 
     public void salva(Video video) {
-        entityManager.persist(video);
+        try {
+            entityManager.persist(video);
+        } catch (TransientPropertyValueException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public Video buscaPorId(Integer id) {

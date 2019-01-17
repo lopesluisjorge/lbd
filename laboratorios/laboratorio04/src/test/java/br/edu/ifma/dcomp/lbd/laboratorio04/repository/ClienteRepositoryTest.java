@@ -2,7 +2,7 @@ package br.edu.ifma.dcomp.lbd.laboratorio04.repository;
 
 import br.edu.ifma.dcomp.lbd.laboratorio04.model.Cliente;
 import br.edu.ifma.dcomp.lbd.laboratorio04.builder.ClienteBuilder;
-import org.junit.jupiter.api.*;
+import org.junit.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -15,27 +15,27 @@ public class ClienteRepositoryTest {
     private EntityManager entityManager;
     private ClienteRepository clienteRepository;
 
-    @BeforeAll
-    private static void init() {
+    @BeforeClass
+    public static void init() {
         entityManagerFactory = Persistence.createEntityManagerFactory("laboratorio04_test");
     }
 
-    @BeforeEach
-    private void setUp() {
+    @Before
+    public void setUp() {
         entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
 
         clienteRepository = new ClienteRepository(entityManager);
     }
 
-    @AfterEach
-    private void tearDown() {
+    @After
+    public void tearDown() {
         entityManager.getTransaction().rollback();
         entityManager.close();
     }
 
-    @AfterAll
-    private static void tearDownAll() {
+    @AfterClass
+    public static void tearDownAll() {
         entityManagerFactory.close();
     }
 
@@ -44,13 +44,13 @@ public class ClienteRepositoryTest {
         final Cliente cliente = new Cliente();
         cliente.setNome("Jon");
         cliente.setCpf("12345678910");
-        cliente.setEndereco("R. S. Antonio");
+        cliente.setEndereco(ClienteBuilder.umEndereco());
         cliente.setTelefone("(98) 988887777");
 
         clienteRepository.salva(cliente);
         entityManager.flush();
 
-        Assertions.assertTrue(cliente.getId() != null);
+        Assert.assertTrue(cliente.getId() != null);
     }
 
     @Test
@@ -62,7 +62,19 @@ public class ClienteRepositoryTest {
 
         final Cliente clienteBusca = clienteRepository.buscaPorId(cliente.getId());
 
-        Assertions.assertTrue(clienteBusca.equals(cliente));
+        Assert.assertTrue(clienteBusca.equals(cliente));
+    }
+
+    @Test
+    public void deveRetornarClienteComCpfCadastrado() {
+        final Cliente cliente = ClienteBuilder.umcliente().comCpf("12345678910").constroi();
+
+        clienteRepository.salva(cliente);
+        entityManager.flush();
+
+        final Cliente clienteBusca = clienteRepository.buscaPorCpf(cliente.getCpf());
+
+        Assert.assertTrue(clienteBusca.equals(cliente));
     }
 
     @Test
@@ -80,7 +92,7 @@ public class ClienteRepositoryTest {
 
         final Cliente clientePId = clienteRepository.buscaPorId(cliente.getId());
 
-        Assertions.assertEquals(novoNome, clientePId.getNome());
+        Assert.assertEquals(novoNome, clientePId.getNome());
     }
 
     @Test
@@ -92,7 +104,7 @@ public class ClienteRepositoryTest {
 
         clienteRepository.exclui(cliente);
 
-        Assertions.assertEquals(null, clienteRepository.buscaPorId(cliente.getId()));
+        Assert.assertEquals(null, clienteRepository.buscaPorId(cliente.getId()));
     }
 
 }

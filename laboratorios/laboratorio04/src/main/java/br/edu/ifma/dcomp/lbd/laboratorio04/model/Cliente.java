@@ -18,22 +18,25 @@ public class Cliente {
     private String nome;
 
 
-    @Column(columnDefinition = "char(11)", nullable = false, unique = true)
+    @Column(length = 11, nullable = false, unique = true)
     private String cpf;
-
-
-    private String endereco;
 
 
     @Column(length = 20)
     private String telefone;
 
 
+    @Column(columnDefinition = "smallint")
+    private Boolean ativo;
+
+
     @OneToMany(mappedBy = "cliente")
     final private List<Emprestimo> emprestimos = new ArrayList<>();
 
 
-    private Boolean ativo;
+    @Embedded
+    private EnderecoCliente enderecoCliente;
+
 
     public Integer getId() {
         return id;
@@ -55,12 +58,12 @@ public class Cliente {
         this.cpf = cpf;
     }
 
-    public String getEndereco() {
-        return endereco;
+    public EnderecoCliente getEndereco() {
+        return enderecoCliente;
     }
 
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
+    public void setEndereco(EnderecoCliente enderecoCliente) {
+        this.enderecoCliente = enderecoCliente;
     }
 
     public String getTelefone() {

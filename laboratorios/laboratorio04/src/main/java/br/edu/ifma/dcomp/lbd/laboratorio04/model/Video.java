@@ -25,7 +25,7 @@ public class Video {
 
 
     @ManyToOne
-    @JoinColumn(name = "filme_id")
+    @JoinColumn(name = "filme_id", nullable = false)
     private Filme filme;
 
 

@@ -4,7 +4,7 @@ import br.edu.ifma.dcomp.lbd.laboratorio04.builder.FilmeBuilder;
 import br.edu.ifma.dcomp.lbd.laboratorio04.builder.VideoBuilder;
 import br.edu.ifma.dcomp.lbd.laboratorio04.model.Filme;
 import br.edu.ifma.dcomp.lbd.laboratorio04.model.Video;
-import org.junit.jupiter.api.*;
+import org.junit.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -19,13 +19,13 @@ public class VideoRepositoryTest {
     private FilmeRepository filmeRepository;
     private VideoRepository videoRepository;
 
-    @BeforeAll
-    private static void init() {
+    @BeforeClass
+    public static void init() {
         entityManagerFactory = Persistence.createEntityManagerFactory("laboratorio04_test");
     }
 
-    @BeforeEach
-    private void setUp() {
+    @Before
+    public void setUp() {
         entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
 
@@ -33,19 +33,19 @@ public class VideoRepositoryTest {
         videoRepository = new VideoRepository(entityManager);;
     }
 
-    @AfterEach
-    private void tearDown() {
+    @After
+    public void tearDown() {
         entityManager.getTransaction().rollback();
         entityManager.close();
     }
 
-    @AfterAll
-    private static void tearDownAll() {
+    @AfterClass
+    public static void tearDownAll() {
         entityManagerFactory.close();
     }
 
     @Test
-    public void testDeveSalvarVideo() {
+    public void deveSalvarVideo() {
         final Filme filme = FilmeBuilder.umFilme().constroi();
         final Video video = new Video();
         video.setFilme(filme);
@@ -57,11 +57,19 @@ public class VideoRepositoryTest {
         videoRepository.salva(video);
         entityManager.flush();
 
-        Assertions.assertTrue(filme.getId() != null);
+        Assert.assertTrue(filme.getId() != null);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void naoDeveSalvarVideoSemFilmeAtrelado() {
+        final Video video = VideoBuilder.umVideo().comFilme(null).constroi();
+
+        videoRepository.salva(video);
+        entityManager.flush();
     }
 
     @Test
-    public void testDeveConsultarVideo() {
+    public void deveConsultarVideo() {
         final Video video = VideoBuilder.umVideo().constroi();
 
         filmeRepository.salva(video.getFilme());
@@ -70,11 +78,11 @@ public class VideoRepositoryTest {
 
         Video vigeoBusca = videoRepository.buscaPorId(video.getId());
 
-        Assertions.assertTrue(vigeoBusca.equals(video));
+        Assert.assertTrue(vigeoBusca.equals(video));
     }
 
     @Test
-    public void testSeAtualizaOVideoNoBanco() {
+    public void deveAtualizarVideoNoBanco() {
         final Video video = VideoBuilder.umVideo().constroi();
 
         filmeRepository.salva(video.getFilme());
@@ -94,11 +102,11 @@ public class VideoRepositoryTest {
 
         final Video videoPId = videoRepository.buscaPorId(video.getId());
 
-        Assertions.assertEquals(novoFilme, videoPId.getFilme());
+        Assert.assertEquals(novoFilme, videoPId.getFilme());
     }
 
     @Test
-    public void testDeveRemoverOVideo() {
+    public void deveRemoverVideo() {
         final Video video = VideoBuilder.umVideo().constroi();
 
         filmeRepository.salva(video.getFilme());
@@ -109,7 +117,7 @@ public class VideoRepositoryTest {
 
         videoRepository.exclui(video);
 
-        Assertions.assertEquals(null, videoRepository.buscaPorId(idfilme));
+        Assert.assertEquals(null, videoRepository.buscaPorId(idfilme));
     }
 
 }
