@@ -17,7 +17,8 @@ public class Video {
     private Integer status;
 
 
-    private String tipo;
+    @Enumerated(EnumType.STRING)
+    private TipoVideo tipo;
 
 
     @Column(name = "valor_diaria")
@@ -41,11 +42,11 @@ public class Video {
         this.status = status;
     }
 
-    public String getTipo() {
+    public TipoVideo getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(TipoVideo tipo) {
         this.tipo = tipo;
     }
 
