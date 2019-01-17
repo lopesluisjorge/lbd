@@ -31,6 +31,11 @@ public class ClienteBuilder {
         return this;
     }
 
+    public ClienteBuilder inativo() {
+        cliente.desativar();
+        return this;
+    }
+
     public ClienteBuilder comCpf(String cpf) {
         cliente.setCpf(cpf);
         return this;

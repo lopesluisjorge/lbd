@@ -33,6 +33,10 @@ public class EmprestimoService {
     }
 
     public void aloca(Video ... videos) {
+        if (!cliente.isAtivo()) {
+            throw new RuntimeException("Cliente removido não pode registrar empréstimo");
+        }
+
         if (debitoService.locacoesEmAtraso(cliente) != null) {
             throw new RuntimeException("Não pode alocar vídeo pois tem emprestimos em atraso");
         }

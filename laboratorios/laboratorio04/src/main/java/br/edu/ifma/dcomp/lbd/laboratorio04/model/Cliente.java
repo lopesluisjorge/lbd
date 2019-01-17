@@ -27,7 +27,7 @@ public class Cliente {
 
 
     @Column(columnDefinition = "smallint")
-    private Boolean ativo;
+    private Boolean ativo = true;
 
 
     @OneToMany(mappedBy = "cliente")
@@ -37,11 +37,6 @@ public class Cliente {
     @Embedded
     private EnderecoCliente enderecoCliente;
 
-
-    @PrePersist
-    private void prePersist() {
-        ativar();
-    }
 
     public Integer getId() {
         return id;

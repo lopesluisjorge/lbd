@@ -72,4 +72,27 @@ public class EmprestimoServiceTest {
         Assert.assertEquals(1, cliente.getEmprestimos().size());
     }
 
+    @Test(expected = RuntimeException.class)
+    public void naoDeveEmprestarVideoSeClienteEstiverInativo() {
+        final Cliente cliente = ClienteBuilder.umcliente().inativo().comCpf("12345678911").constroi();
+        clienteService.adiciona(cliente);
+
+        final Filme filme1 = FilmeBuilder.umFilme().comTitulo("Filme 1").constroi();
+        final Filme filme2 = FilmeBuilder.umFilme().comTitulo("Filme 2").constroi();
+
+        final Video video1 = VideoBuilder.umVideo().comFilme(filme1).comTipo(TipoVideo.DVD).constroi();
+        final Video video2 = VideoBuilder.umVideo().comFilme(filme1).comTipo(TipoVideo.VHS).constroi();
+        final Video video3 = VideoBuilder.umVideo().comFilme(filme2).constroi();
+
+        filmeService.adiciona(filme1);
+        filmeService.adiciona(filme2);
+
+        videoService.adiciona(video1);
+        videoService.adiciona(video2);
+        videoService.adiciona(video3);
+
+        emprestimoService = new EmprestimoService(entityManager, cliente);
+        emprestimoService.aloca(video1, video3);
+    }
+
 }
