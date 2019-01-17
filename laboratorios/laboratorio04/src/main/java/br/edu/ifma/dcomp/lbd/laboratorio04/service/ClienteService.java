@@ -40,7 +40,14 @@ public class ClienteService {
 
     public void remove(Cliente cliente) {
         entityManager.getTransaction().begin();
-        clienteRepository.exclui(cliente);
+
+        try {
+            cliente.desativar();
+            clienteRepository.atualiza(cliente);
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+        }
+
         entityManager.getTransaction().commit();
     }
 

@@ -73,8 +73,4 @@ public class ClienteRepository {
         entityManager.merge(cliente);
     }
 
-    public void exclui(Cliente cliente) {
-        entityManager.remove(cliente);
-    }
-
 }

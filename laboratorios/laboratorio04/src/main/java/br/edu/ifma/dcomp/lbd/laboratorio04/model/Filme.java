@@ -19,10 +19,15 @@ public class Filme {
     private String titulo;
 
 
-    @Column(name = "ano_lancamento")
+    @Lob
+    private String assunto;
+
+
+    @Column(name = "ano_lancamento", nullable = false)
     private Integer anoDeLancamento;
 
 
+    @Column(nullable = false)
     private Integer duracao;
 
 

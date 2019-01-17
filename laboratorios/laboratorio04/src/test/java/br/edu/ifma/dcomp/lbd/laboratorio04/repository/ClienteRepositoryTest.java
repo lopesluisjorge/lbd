@@ -95,16 +95,4 @@ public class ClienteRepositoryTest {
         Assert.assertEquals(novoNome, clientePId.getNome());
     }
 
-    @Test
-    public void deveRemoverOCliente() {
-        final Cliente cliente = ClienteBuilder.umcliente().constroi();
-
-        clienteRepository.salva(cliente);
-        entityManager.flush();
-
-        clienteRepository.exclui(cliente);
-
-        Assert.assertEquals(null, clienteRepository.buscaPorId(cliente.getId()));
-    }
-
 }

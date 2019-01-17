@@ -38,6 +38,11 @@ public class Cliente {
     private EnderecoCliente enderecoCliente;
 
 
+    @PrePersist
+    private void prePersist() {
+        ativar();
+    }
+
     public Integer getId() {
         return id;
     }
