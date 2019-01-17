@@ -3,10 +3,7 @@ package br.edu.ifma.dcomp.lbd.laboratorio04.model;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "emprestimo")
@@ -95,6 +92,10 @@ public class Emprestimo {
         this.videos.addAll(Arrays.asList(videos));
     }
 
+    public void adiciona(List<Video> videos) {
+        this.videos.addAll(videos);
+    }
+
     public Set<Video> getVideos() {
         return videos;
     }
@@ -111,4 +112,5 @@ public class Emprestimo {
     public int hashCode() {
         return Objects.hash(id);
     }
+
 }

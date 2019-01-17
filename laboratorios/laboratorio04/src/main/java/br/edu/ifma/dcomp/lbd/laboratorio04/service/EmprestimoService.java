@@ -47,7 +47,7 @@ public class EmprestimoService {
         entityManager.getTransaction().begin();
 
         final Emprestimo emprestimo = new Emprestimo();
-        emprestimo.adiciona(videos);
+        emprestimo.adiciona(videosDisponiveis);
         emprestimo.setCliente(cliente);
         cliente.adicionar(emprestimo);
         videosDisponiveis.forEach(video -> video.setStatus(StatusVideo.EMPRESTADO));
