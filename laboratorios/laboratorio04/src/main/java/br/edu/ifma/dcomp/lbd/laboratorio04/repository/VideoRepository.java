@@ -4,6 +4,7 @@ import br.edu.ifma.dcomp.lbd.laboratorio04.model.Video;
 import org.hibernate.TransientPropertyValueException;
 
 import javax.persistence.EntityManager;
+import java.util.List;
 
 public class VideoRepository {
 
@@ -19,6 +20,20 @@ public class VideoRepository {
         } catch (TransientPropertyValueException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public List<Video> lista() {
+        return entityManager
+                .createQuery("from Video", Video.class)
+                .getResultList();
+    }
+
+    public List<Video> pagina(Integer inicio, Integer quantidade) {
+        return entityManager
+                .createQuery("from Video limit :inicio, :fim", Video.class)
+                .setFirstResult(inicio)
+                .setMaxResults(quantidade)
+                .getResultList();
     }
 
     public Video buscaPorId(Integer id) {

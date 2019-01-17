@@ -2,7 +2,6 @@ package br.edu.ifma.dcomp.lbd.laboratorio04.repository;
 
 import br.edu.ifma.dcomp.lbd.laboratorio04.model.Cliente;
 import br.edu.ifma.dcomp.lbd.laboratorio04.model.Emprestimo;
-import br.edu.ifma.dcomp.lbd.laboratorio04.model.Filme;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -17,6 +16,12 @@ public class ClienteRepository {
 
     public void salva(Cliente cliente) {
         entityManager.persist(cliente);
+    }
+
+    public List<Cliente> lista() {
+        return entityManager
+                .createQuery("from Cliente", Cliente.class)
+                .getResultList();
     }
 
     public Cliente buscaPorId(Integer id) {

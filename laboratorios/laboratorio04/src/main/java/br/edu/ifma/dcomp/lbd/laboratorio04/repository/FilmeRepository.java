@@ -1,7 +1,6 @@
 package br.edu.ifma.dcomp.lbd.laboratorio04.repository;
 
 import br.edu.ifma.dcomp.lbd.laboratorio04.model.Filme;
-import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -16,6 +15,12 @@ public class FilmeRepository {
 
     public void salva(Filme filme) {
         entityManager.persist(filme);
+    }
+
+    public List<Filme> lista() {
+        return entityManager
+                .createQuery("from Filme", Filme.class)
+                .getResultList();
     }
 
     public Filme buscaPorId(Integer id) {
