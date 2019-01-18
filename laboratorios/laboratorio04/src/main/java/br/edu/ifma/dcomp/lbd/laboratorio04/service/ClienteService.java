@@ -42,6 +42,9 @@ public class ClienteService {
         entityManager.getTransaction().begin();
 
         try {
+            if (clienteRepository.quantidadeDeEmprestimosEmAtraso(cliente) == 0) {
+                throw new RuntimeException("Você está com empréstimos em atraso.");
+            }
             cliente.desativar();
             clienteRepository.atualiza(cliente);
         } catch (Exception e) {

@@ -8,19 +8,13 @@ import javax.persistence.EntityManager;
 public class EmprestimoRepository {
 
     private EntityManager entityManager;
-    private Cliente cliente;
 
-    public EmprestimoRepository(EntityManager entityManager, Cliente cliente) {
+    public EmprestimoRepository(EntityManager entityManager) {
         this.entityManager = entityManager;
-        this.cliente = cliente;
     }
 
     public void atualiza(Emprestimo emprestimo) {
         entityManager.merge(emprestimo);
-    }
-
-    public void devolve() {
-
     }
 
 }

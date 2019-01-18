@@ -19,8 +19,8 @@ public class Filme {
     private String titulo;
 
 
-    @Lob
-    private String assunto;
+    @Enumerated(EnumType.STRING)
+    private Categoria categoria;
 
 
     @Column(name = "ano_lancamento", nullable = false)
@@ -81,6 +81,14 @@ public class Filme {
 
     public List<Video> getVideos() {
         return videos;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 
     @Override

@@ -2,6 +2,7 @@ package br.edu.ifma.dcomp.lbd.laboratorio04.model;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -9,13 +10,15 @@ import java.util.*;
 @Table(name = "emprestimo")
 public class Emprestimo {
 
+    final public static int MAXIMO_DIAS_DO_EMPRESTIMO = 3;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
 
     @Column(name = "data_locacao")
-    private LocalDate dataDeLocacao;
+    private LocalDate dataDeLocacao = LocalDate.now();
 
 
     @Column(name = "data_devolucao")
@@ -26,7 +29,8 @@ public class Emprestimo {
     private BigDecimal valorDoAluguel;
 
 
-    private Boolean status;
+    @Enumerated(EnumType.STRING)
+    private StatusEmprestimo status = StatusEmprestimo.ATIVO;
 
 
     @ManyToOne
@@ -43,17 +47,16 @@ public class Emprestimo {
     private Set<Video> videos = new HashSet<>();
 
 
-    @PrePersist
-    private void prePersist() {
-        dataDeLocacao = LocalDate.now();
-    }
-
     public Integer getId() {
         return id;
     }
 
     public LocalDate getDataDeLocacao() {
         return dataDeLocacao;
+    }
+
+    public void setDataDeLocacao(LocalDate dataDeLocacao) {
+        this.dataDeLocacao = dataDeLocacao;
     }
 
     public LocalDate getDataDeDevolucao() {
@@ -68,15 +71,27 @@ public class Emprestimo {
         return valorDoAluguel;
     }
 
-    public void setValorDoAluguel(BigDecimal valorDoAluguel) {
-        this.valorDoAluguel = valorDoAluguel;
+    public void calculaValorDoAluguel() {
+        if (dataDeDevolucao == null ) {
+            throw new RuntimeException("Não é possivel calcular o valor do aluguel");
+        }
+
+        int dias;
+        for (dias = 0; dataDeDevolucao.equals(dataDeLocacao.plusDays(dias)); dias++);
+
+        BigDecimal valorTotalDiaria = new BigDecimal(0);
+        videos.forEach(video -> {
+            valorTotalDiaria.add(video.getValorDaDiaria());
+        });
+
+        this.valorDoAluguel = valorTotalDiaria.plus(new MathContext(dias));
     }
 
-    public Boolean getStatus() {
+    public StatusEmprestimo getStatus() {
         return status;
     }
 
-    public void setStatus(Boolean status) {
+    public void setStatus(StatusEmprestimo status) {
         this.status = status;
     }
 

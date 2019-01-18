@@ -8,6 +8,7 @@ import br.edu.ifma.dcomp.lbd.laboratorio04.repository.ClienteRepository;
 import br.edu.ifma.dcomp.lbd.laboratorio04.repository.EmprestimoRepository;
 
 import javax.persistence.EntityManager;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -15,29 +16,26 @@ import java.util.List;
 public class EmprestimoService {
 
     private EntityManager entityManager;
-    private Cliente cliente;
-
-    private DebitoService debitoService;
 
     private EmprestimoRepository emprestimoRepository;
     private ClienteRepository clienteRepository;
 
-    public EmprestimoService(EntityManager em, Cliente cliente) {
+    public EmprestimoService(EntityManager em) {
         this.entityManager = em;
-        this.cliente = cliente;
 
-        this.debitoService = new DebitoService(entityManager);
-
-        this.emprestimoRepository = new EmprestimoRepository(entityManager, cliente);
+        this.emprestimoRepository = new EmprestimoRepository(entityManager);
         this.clienteRepository = new ClienteRepository(entityManager);
     }
 
-    public void aloca(Video ... videos) {
+
+
+    public Emprestimo aloca(Cliente cliente, LocalDate dataLocacao, Video ... videos) {
+
         if (!cliente.isAtivo()) {
             throw new RuntimeException("Cliente removido não pode registrar empréstimo");
         }
 
-        if (debitoService.locacoesEmAtraso(cliente) != null) {
+        if (clienteRepository.quantidadeDeEmprestimosEmAtraso(cliente) != 0) {
             throw new RuntimeException("Não pode alocar vídeo pois tem emprestimos em atraso");
         }
 
@@ -51,6 +49,7 @@ public class EmprestimoService {
         entityManager.getTransaction().begin();
 
         final Emprestimo emprestimo = new Emprestimo();
+        emprestimo.setDataDeLocacao(dataLocacao);
         emprestimo.adiciona(videosDisponiveis);
         emprestimo.setCliente(cliente);
         cliente.adicionar(emprestimo);
@@ -60,6 +59,12 @@ public class EmprestimoService {
         clienteRepository.atualiza(cliente);
 
         entityManager.getTransaction().commit();
+
+        return emprestimo;
+    }
+
+    public Emprestimo aloca(Cliente cliente, Video ... videos) {
+        return aloca(cliente, LocalDate.now(), videos);
     }
 
     private boolean isDisponivel(Video video) {

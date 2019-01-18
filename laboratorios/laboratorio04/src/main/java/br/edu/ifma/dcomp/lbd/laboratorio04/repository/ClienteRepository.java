@@ -2,6 +2,7 @@ package br.edu.ifma.dcomp.lbd.laboratorio04.repository;
 
 import br.edu.ifma.dcomp.lbd.laboratorio04.model.Cliente;
 import br.edu.ifma.dcomp.lbd.laboratorio04.model.Emprestimo;
+import br.edu.ifma.dcomp.lbd.laboratorio04.model.StatusEmprestimo;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -58,15 +59,11 @@ public class ClienteRepository {
         return null;
     }
 
-    /**
-     * TODO
-     * @param cliente
-     * @return
-     */
-    public List<Emprestimo> emprestimosEmAtraso(Cliente cliente) {
-        String jpql = "from Cliente c inner join fetch c.emprestimos e where e.";
+    public Integer quantidadeDeEmprestimosEmAtraso(Cliente cliente) {
+        final String jpql = String.format("select count(*) from emprestimo where cliente_id = :cliente and data_locacao - data_devolucao > %d",
+                Emprestimo.MAXIMO_DIAS_DO_EMPRESTIMO);
 
-        return null;
+        return  entityManager.createNativeQuery(jpql, Integer.class).setParameter("cliente", cliente.getId()).getFirstResult();
     }
 
     public void atualiza(Cliente cliente) {
