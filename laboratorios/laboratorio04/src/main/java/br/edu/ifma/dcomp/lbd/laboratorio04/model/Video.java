@@ -12,23 +12,18 @@ public class Video {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-
     @Enumerated(EnumType.STRING)
     private StatusVideo status;
-
 
     @Enumerated(EnumType.STRING)
     private TipoVideo tipo;
 
-
     @Column(name = "valor_diaria")
     private BigDecimal valorDaDiaria;
-
 
     @ManyToOne
     @JoinColumn(name = "filme_id", nullable = false)
     private Filme filme;
-
 
     public Integer getId() {
         return id;

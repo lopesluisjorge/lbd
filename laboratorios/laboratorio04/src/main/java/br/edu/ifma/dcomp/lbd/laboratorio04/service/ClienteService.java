@@ -38,18 +38,19 @@ public class ClienteService {
         return clienteRepository.buscaPorCpf(cpf);
     }
 
+    /**
+     * @throws RuntimeException
+     * @param cliente
+     */
     public void remove(Cliente cliente) {
+        if (clienteRepository.quantidadeDeEmprestimosEmAtraso(cliente) == 0) {
+            throw new RuntimeException("Você está com empréstimos em atraso.");
+        }
+
         entityManager.getTransaction().begin();
 
-        try {
-            if (clienteRepository.quantidadeDeEmprestimosEmAtraso(cliente) == 0) {
-                throw new RuntimeException("Você está com empréstimos em atraso.");
-            }
-            cliente.desativar();
-            clienteRepository.atualiza(cliente);
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-        }
+        cliente.desativar();
+        clienteRepository.atualiza(cliente);
 
         entityManager.getTransaction().commit();
     }

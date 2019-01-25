@@ -16,6 +16,7 @@ public class DevolucaoService {
 
     public DevolucaoService(EntityManager entityManager) {
         this.entityManager = entityManager;
+        this.emprestimoRepository = new EmprestimoRepository(entityManager);
     }
 
     public void devolve(Emprestimo emprestimo) {
@@ -23,7 +24,6 @@ public class DevolucaoService {
         emprestimo.calculaValorDoAluguel();
         emprestimoRepository.atualiza(emprestimo);
     }
-
 
     public void paga(Emprestimo emprestimo) {
         emprestimo.setStatus(StatusEmprestimo.PAGO);

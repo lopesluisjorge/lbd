@@ -27,8 +27,6 @@ public class EmprestimoService {
         this.clienteRepository = new ClienteRepository(entityManager);
     }
 
-
-
     public Emprestimo aloca(Cliente cliente, LocalDate dataLocacao, Video ... videos) {
 
         if (!cliente.isAtivo()) {

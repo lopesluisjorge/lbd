@@ -14,30 +14,24 @@ public class Filme {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-
     @Column(nullable = false)
     private String titulo;
 
-
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private Categoria categoria;
-
 
     @Column(name = "ano_lancamento", nullable = false)
     private Integer anoDeLancamento;
 
-
     @Column(nullable = false)
     private Integer duracao;
-
 
     @Column(nullable = false)
     private String genero;
 
-
     @OneToMany(mappedBy = "filme")
     final private List<Video> videos = new ArrayList<>();
-
 
     public Integer getId() {
         return id;

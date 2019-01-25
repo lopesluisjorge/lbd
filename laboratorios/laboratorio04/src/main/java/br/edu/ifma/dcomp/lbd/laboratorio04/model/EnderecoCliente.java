@@ -8,23 +8,18 @@ public class EnderecoCliente {
     @Column(name = "endereco_cep", length = 8, nullable = false)
     private String cep;
 
-
     @Lob
     @Column(name = "endereco_logradouro", nullable = false)
     private String logradouro;
 
-
     @Column(name = "endereco_numero", columnDefinition = "smallint", nullable = false)
     private Integer numero;
-
 
     @Column(name = "endereco_bairro", nullable = false)
     private String bairro;
 
-
     @Column(name = "endereco_cidade", nullable = false)
     private String cidade;
-
 
     @Column(name = "endereco_uf", length = 2, nullable = false)
     private String uf;
@@ -32,7 +27,6 @@ public class EnderecoCliente {
     @Lob
     @Column(name = "endereco_complemento")
     private String complemento;
-
 
     public String getCep() {
         return cep;

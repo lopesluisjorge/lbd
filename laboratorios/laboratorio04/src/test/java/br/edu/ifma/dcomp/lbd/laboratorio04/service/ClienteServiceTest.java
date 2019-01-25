@@ -49,7 +49,7 @@ public class ClienteServiceTest {
         Assert.assertTrue(cliente.getId() != null);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void naoDeveRemoverCliente() {
         final Cliente cliente = ClienteBuilder.umcliente().comCpf("12345678913").constroi();
         clienteService.adiciona(cliente);

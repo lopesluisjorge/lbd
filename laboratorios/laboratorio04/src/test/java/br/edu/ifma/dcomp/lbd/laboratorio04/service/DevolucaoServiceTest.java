@@ -72,8 +72,10 @@ public class DevolucaoServiceTest {
         int DIAS_EMPRESTADOS = 2;
         // Feito ontem
         Emprestimo emprestimo = emprestimoService.aloca(cliente, LocalDate.now().minusDays(DIAS_EMPRESTADOS), video1, video3);
-        
+
+
         devolucaoService.devolve(emprestimo);
+        emprestimo.calculaValorDoAluguel();
 
         Assert.assertEquals(StatusEmprestimo.ATIVO, emprestimo.getStatus());
         Assert.assertEquals(new BigDecimal(DIAS_EMPRESTADOS + (VALOR_VIDEO + VALOR_VIDEO)), emprestimo.getValorDoAluguel());

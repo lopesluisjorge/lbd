@@ -2,6 +2,7 @@ package br.edu.ifma.dcomp.lbd.laboratorio04.repository;
 
 import br.edu.ifma.dcomp.lbd.laboratorio04.builder.FilmeBuilder;
 import br.edu.ifma.dcomp.lbd.laboratorio04.builder.VideoBuilder;
+import br.edu.ifma.dcomp.lbd.laboratorio04.model.Categoria;
 import br.edu.ifma.dcomp.lbd.laboratorio04.model.Filme;
 import br.edu.ifma.dcomp.lbd.laboratorio04.model.Video;
 import org.junit.*;
@@ -45,6 +46,7 @@ public class FilmeRepositoryTest {
     @Test
     public void deveSalvarFilme() {
         final Filme filme = new Filme();
+        filme.setCategoria(Categoria.LANCAMENTO);
         filme.setTitulo("Seja o que Deus quiser");
         filme.setAnoDeLancamento(2019);
         filme.setDuracao(2);

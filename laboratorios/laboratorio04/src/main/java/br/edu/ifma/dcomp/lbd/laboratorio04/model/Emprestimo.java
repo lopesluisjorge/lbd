@@ -16,27 +16,21 @@ public class Emprestimo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-
     @Column(name = "data_locacao")
     private LocalDate dataDeLocacao = LocalDate.now();
-
 
     @Column(name = "data_devolucao")
     private LocalDate dataDeDevolucao;
 
-
     @Column(name = "valor_aluguel")
     private BigDecimal valorDoAluguel;
-
 
     @Enumerated(EnumType.STRING)
     private StatusEmprestimo status = StatusEmprestimo.ATIVO;
 
-
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
-
 
     @ManyToMany
     @JoinTable(
@@ -45,7 +39,6 @@ public class Emprestimo {
             inverseJoinColumns = @JoinColumn(name = "video_id")
     )
     private Set<Video> videos = new HashSet<>();
-
 
     public Integer getId() {
         return id;

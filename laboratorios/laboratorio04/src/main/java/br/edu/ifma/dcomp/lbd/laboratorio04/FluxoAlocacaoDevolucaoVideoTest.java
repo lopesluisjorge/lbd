@@ -35,7 +35,7 @@ public class FluxoAlocacaoDevolucaoVideoTest {
         clienteService.adiciona(cliente);
 
         final Filme filme = new Filme();
-
+        filme.setCategoria(Categoria.LANCAMENTO);
         filme.setTitulo("Seja o que Deus quiser");
         filme.setAnoDeLancamento(2019);
         filme.setDuracao(2);

@@ -13,30 +13,23 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-
     @Column(length = 64, nullable = false)
     private String nome;
-
 
     @Column(length = 11, nullable = false, unique = true)
     private String cpf;
 
-
     @Column(length = 20)
     private String telefone;
-
 
     @Column(columnDefinition = "smallint")
     private Boolean ativo = true;
 
-
     @OneToMany(mappedBy = "cliente")
     final private List<Emprestimo> emprestimos = new ArrayList<>();
 
-
     @Embedded
     private EnderecoCliente enderecoCliente;
-
 
     public Integer getId() {
         return id;
