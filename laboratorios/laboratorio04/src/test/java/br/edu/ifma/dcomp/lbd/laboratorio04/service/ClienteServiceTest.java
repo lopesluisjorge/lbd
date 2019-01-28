@@ -73,7 +73,7 @@ public class ClienteServiceTest {
         videoService.adiciona(video3);
 
         EmprestimoService emprestimoService = new EmprestimoService(entityManager);
-        // Emprestimo atrasado
+        // EmprestimoTest atrasado
         emprestimoService.aloca(cliente, LocalDate.now().minusDays(Emprestimo.MAXIMO_DIAS_DO_EMPRESTIMO + 1), video1);
 
         clienteService.remove(cliente);

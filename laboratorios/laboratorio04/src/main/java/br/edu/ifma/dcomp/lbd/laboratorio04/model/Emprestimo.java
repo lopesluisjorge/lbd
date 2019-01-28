@@ -69,15 +69,15 @@ public class Emprestimo {
             throw new RuntimeException("Não é possivel calcular o valor do aluguel");
         }
 
-        int dias;
-        for (dias = 0; dataDeDevolucao.equals(dataDeLocacao.plusDays(dias)); dias++);
+        int dias = 1;
+        for ( ; dataDeDevolucao.equals(dataDeLocacao.plusDays(dias++)); );
 
-        BigDecimal valorTotalDiaria = new BigDecimal(0);
-        videos.forEach(video -> {
-            valorTotalDiaria.add(video.getValorDaDiaria());
-        });
+        Double valorTotalDiaria = 0.0;
+        for (Video video : videos) {
+            valorTotalDiaria += Double.parseDouble(video.getValorDaDiaria().toString());
+        }
 
-        this.valorDoAluguel = valorTotalDiaria.plus(new MathContext(dias));
+        this.valorDoAluguel = new BigDecimal(valorTotalDiaria * dias);
     }
 
     public StatusEmprestimo getStatus() {
