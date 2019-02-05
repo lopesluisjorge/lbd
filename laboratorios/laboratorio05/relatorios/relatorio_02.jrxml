@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_01" pageWidth="595" pageHeight="842" columnWidth="454" leftMargin="85" rightMargin="56" topMargin="85" bottomMargin="56" uuid="f2c6ea5d-5585-4707-bb39-a57b97cac4cb">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Laboratório 05"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="471"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="523"/>
+	<subDataset name="Dataset1" uuid="574635fb-04d9-403d-8539-f4e141539138">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Laboratório 05"/>
+		<property name="com.jaspersoft.studio.data.sql.tables">
+			<![CDATA[bGFib3JhdG9yaW8wNS5lbXByZXN0aW1vICwxNSwxNSw5ZDVhNWE2Ni1mMGJiLTQ5M2UtOTViNC0w
+NmFjY2RhMDVlYTk7
+]]>
+		</property>
+		<queryString>
+			<![CDATA[SELECT laboratorio05.emprestimo.cliente_id,
+	sum(valor_aluguel)
+FROM laboratorio05.emprestimo
+GROUP BY laboratorio05.emprestimo.cliente_id]]>
+		</queryString>
+		<field name="cliente_id" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.label" value="cliente_id"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="emprestimo"/>
+		</field>
+		<field name="sum(valor_aluguel)" class="java.math.BigDecimal">
+			<property name="com.jaspersoft.studio.field.label" value="sum(valor_aluguel)"/>
+		</field>
+	</subDataset>
+	<queryString>
+		<![CDATA[SELECT laboratorio05.cliente.nome,
+	laboratorio05.emprestimo.data_locacao,
+	laboratorio05.emprestimo.data_devolucao,
+	laboratorio05.emprestimo.valor_aluguel,
+	laboratorio05.cliente.id
+FROM laboratorio05.emprestimo
+	INNER JOIN laboratorio05.cliente ON 
+	 laboratorio05.emprestimo.cliente_id = laboratorio05.cliente.id]]>
+	</queryString>
+	<field name="nome" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nome"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cliente"/>
+	</field>
+	<field name="data_locacao" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="data_locacao"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="emprestimo"/>
+	</field>
+	<field name="data_devolucao" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="data_devolucao"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="emprestimo"/>
+	</field>
+	<field name="valor_aluguel" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="valor_aluguel"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="emprestimo"/>
+	</field>
+	<field name="id" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cliente"/>
+	</field>
+	<variable name="soma_valor_aluguel" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{valor_aluguel}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<group name="agrupar_por_nome_de_cliente">
+		<groupExpression><![CDATA[$F{nome}]]></groupExpression>
+		<groupHeader>
+			<band height="50">
+				<rectangle>
+					<reportElement mode="Opaque" x="0" y="20" width="454" height="30" backcolor="#E6E6E6" uuid="e0813636-d76e-45ea-b575-62002ffa10d4"/>
+					<graphicElement>
+						<pen lineWidth="0.0" lineColor="#000000"/>
+					</graphicElement>
+				</rectangle>
+				<textField>
+					<reportElement x="100" y="20" width="352" height="30" forecolor="#000000" backcolor="#FFFFFF" uuid="3ab9586b-7741-4e01-aa08-4ca98d5b1afe"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle" markup="styled">
+						<font fontName="Serif" size="12" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="20" width="100" height="30" forecolor="#000000" backcolor="#FFFFFF" uuid="3250df53-9c32-491c-be7c-881bba35f6b0"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Serif" size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Cliente:]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="100" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Opaque" x="0" y="0" width="454" height="100" backcolor="#E6E6E6" uuid="2c1fc4f4-a0f3-471e-bf5c-73cc5399da4f"/>
+				<graphicElement>
+					<pen lineColor="#FFFFFF"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="454" height="100" uuid="b41765c3-9a9d-4d70-9cec-7f6590168a58"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="22"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Locações por Cliente]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="150" height="30" uuid="7d05a6cb-2d4d-48cf-822f-de56ff7f9354">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f260fefa-cde6-4f92-9689-c9953361b550"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Serif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATA DE LOCAÇÃO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="150" y="0" width="152" height="30" uuid="40666f2e-870d-4a4c-9a0c-28a1a9c7a129">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="50a3f4b5-c53d-41ec-9a50-308401b349ab"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Serif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATA DE DEVOLUÇÃO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="302" y="0" width="152" height="30" uuid="e657e3b1-eaae-40ad-89bc-e4e008f1c15e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4d1147f2-972d-4dbb-9e76-89ea028cdadd"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Serif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VALOR DO ALUGUEL]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField pattern="dd/MM/Y">
+				<reportElement x="0" y="0" width="150" height="30" uuid="983646a8-8aed-4794-bf06-19b3587982af">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f260fefa-cde6-4f92-9689-c9953361b550"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Serif" size="12"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{data_locacao}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/Y">
+				<reportElement x="150" y="0" width="152" height="30" uuid="21f9a865-7750-4489-aa81-d6d7873d1dae">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="50a3f4b5-c53d-41ec-9a50-308401b349ab"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Serif" size="12"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{data_devolucao}]]></textFieldExpression>
+			</textField>
+			<textField pattern="R$ #0.00;¤-#0.##">
+				<reportElement x="302" y="0" width="152" height="30" uuid="47a8a55a-d721-4c17-9e53-8abef41d7b41">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4d1147f2-972d-4dbb-9e76-89ea028cdadd"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Serif" size="12"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{valor_aluguel}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="57" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="30" splitType="Stretch">
+			<textField evaluationTime="Report">
+				<reportElement x="390" y="0" width="64" height="30" uuid="1e72df93-8c6e-4229-913c-2d833e91d90a"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[" de " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="326" y="-1" width="64" height="30" uuid="10d37b87-5ed2-47ab-8d30-dce1bfddbdc1"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Página " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/Y">
+				<reportElement x="0" y="0" width="100" height="30" uuid="a2424fd9-ec52-41c7-b845-14d1e8deea9a"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

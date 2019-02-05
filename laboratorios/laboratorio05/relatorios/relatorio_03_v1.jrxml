@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_01" pageWidth="595" pageHeight="842" columnWidth="454" leftMargin="85" rightMargin="56" topMargin="85" bottomMargin="56" uuid="f2c6ea5d-5585-4707-bb39-a57b97cac4cb">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Laboratório 05"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<queryString>
+		<![CDATA[SELECT count(cliente_id) AS count_cliente_id,
+	laboratorio05.cliente.nome
+FROM laboratorio05.emprestimo
+	INNER JOIN laboratorio05.cliente ON 
+	 laboratorio05.emprestimo.cliente_id = laboratorio05.cliente.id 
+GROUP BY laboratorio05.emprestimo.cliente_id
+ORDER BY count_cliente_id DESC, nome
+LIMIT 5]]>
+	</queryString>
+	<field name="count_cliente_id" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="count_cliente_id"/>
+	</field>
+	<field name="nome" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nome"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cliente"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="100" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Opaque" x="0" y="0" width="454" height="100" backcolor="#E6E6E6" uuid="353a3679-8005-49dd-9f21-78a96168fe92"/>
+				<graphicElement>
+					<pen lineColor="#FFFFFF"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="454" height="100" backcolor="#E6E6E6" uuid="b4916651-96c5-4879-abdd-76a5bd92719c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Serif" size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Melhores Clientes da Locadora]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="30">
+			<staticText>
+				<reportElement positionType="Float" x="0" y="0" width="250" height="30" uuid="d33d3560-1c7b-4355-b73c-826ab5899eb1">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1cc12b09-97f5-4c72-9b89-b41197075a87"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Serif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOME DO CLIENTE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="250" y="0" width="204" height="30" uuid="495bdc96-bb5f-48ee-bb10-8de77a5a734d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="80f1e3cf-d884-4f06-a833-0a97534a67e3"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Serif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[QUANTIDADE DE EMPRÉSTIMOS]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30">
+			<textField>
+				<reportElement x="250" y="0" width="204" height="30" uuid="59653421-bafa-45d9-ba9c-6ceee3c13249">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="80f1e3cf-d884-4f06-a833-0a97534a67e3"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Serif" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{count_cliente_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="250" height="30" uuid="0fdabe31-613e-4457-baea-998e85a4aca9">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1cc12b09-97f5-4c72-9b89-b41197075a87"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Serif" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="30">
+			<textField evaluationTime="Report">
+				<reportElement x="390" y="0" width="64" height="30" uuid="e1a1a5e7-1447-4930-ac6f-de77f70176a6"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Serif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" de " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="326" y="-1" width="64" height="30" uuid="d14b1c40-ad0a-459f-81ef-23a331ceba1c"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Serif"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/Y">
+				<reportElement x="0" y="0" width="100" height="30" uuid="7acddc07-b70e-41ac-8d93-e4d774e69f85"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Serif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="255" splitType="Stretch">
+			<pieChart>
+				<chart evaluationTime="Report">
+					<reportElement x="0" y="0" width="454" height="255" uuid="0d7f9a8c-83d6-4309-89ba-58cb74b70476"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset>
+					<keyExpression><![CDATA[$F{nome}]]></keyExpression>
+					<valueExpression><![CDATA[$F{count_cliente_id}]]></valueExpression>
+					<labelExpression><![CDATA[$F{nome}]]></labelExpression>
+				</pieDataset>
+				<piePlot>
+					<plot/>
+					<itemLabel/>
+				</piePlot>
+			</pieChart>
+		</band>
+	</summary>
+</jasperReport>
