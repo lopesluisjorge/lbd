@@ -1,0 +1,53 @@
+[
+    {
+        "id": 1,
+        "tipo": "DVD",
+        "valor_diaria": 2.99,
+        "filme": {
+            "titulo": "Até que a Sorte nos Separe",
+            "ano_lancamento": 2012,
+            "duracao": 90,
+            "genero": "Comédia",
+            "atores": [
+                "Leandro Hassum",
+                "Danielle Winits",
+                "Kiko Mascarenhas",
+                "Rita Elmôr",
+                "Rodrigo Sant' Anna"
+            ],
+            "diretor": "Roberto Santucci"
+        }
+    },
+    {
+        "id": 2,
+        "tipo": "VHS",
+        "valor_diaria": 3.99,
+        "filme": {
+            "titulo": "O Poderoso Chefão"
+        }
+    },
+    {
+        "id": 3,
+        "tipo": "DVD",
+        "valor_diaria": 2.95,
+        "filme": {
+            "titulo": "Até que a Sorte nos Separe II",
+        }
+    },
+    {
+        "id": 4,
+        "tipo": "DVD",
+        "valor_diaria": 2.99,
+        "filme": {
+            "titulo": "O Exterminador do Futuro"
+        }
+    },
+    {
+        "id": 5,
+        "tipo": "VHS",
+        "valor_diaria": 2.99,
+        "filme": {
+            "titulo": "Robin Hood",
+        }
+    }
+]
