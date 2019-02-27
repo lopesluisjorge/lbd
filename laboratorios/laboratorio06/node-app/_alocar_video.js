@@ -9,7 +9,7 @@ MongoClient.connect(dsn, (error, client) => {
     console.error(error)
   }
 
-  const database = client.db('lab-05')
+  const database = client.db('laboratorio06')
 
   const customers = database.collection('clientes')
 

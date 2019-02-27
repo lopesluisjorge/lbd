@@ -1,5 +1,3 @@
-drop database laboratorio05;
-
 create database laboratorio05 charset utf8 collate utf8_unicode_ci;
 
 use laboratorio05;
